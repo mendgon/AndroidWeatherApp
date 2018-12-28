@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="open_weather_maps_app_id">11111</string>
+</resources>
