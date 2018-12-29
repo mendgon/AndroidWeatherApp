@@ -63,22 +63,21 @@ public class change_sity extends Activity implements View.OnClickListener {
         btnClear.setOnClickListener(this);
 
 
+
         CityName = getIntent().getStringExtra("CName");
         loadWeather(CityName);
         Log.d(TAG, "City name " + CityName);
         // создаем объект для создания и управления версиями БД
         dbHelper = new DBHelper(this);
-        View.OnClickListener ONcl = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
+    }
+    //Работа с сервисом
+    public void onClickStart(View v) {
+        startService(new Intent(this, MyService.class).putExtra("ForServisName",CityName));
+    }
 
-                // intent.putExtra("Name", Name_c.getText().toString());
-
-            }
-        };
-
-        //  BtnOK.setOnClickListener(ONcl);
+    public void onClickStop(View v) {
+        stopService(new Intent(this, MyService.class));
     }
 
 
@@ -88,8 +87,6 @@ public class change_sity extends Activity implements View.OnClickListener {
         RequestQueue mRequestQueue;
 
         final int[] temp = new int[1];
-        final int[] pressure = new int[1];
-        long wind;
 
         // Instantiate the cache
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
@@ -115,12 +112,11 @@ public class change_sity extends Activity implements View.OnClickListener {
                             JSONObject main = response.getJSONObject("main");
 
                             temp[0] = (int) Math.round(main.getDouble("temp")); //Это в кельвинах
-                            pressure[0] = (int) (main.getDouble("pressure") * 0.75006375541921);
 
                             int temperature;
                             temperature = temp[0] - 273;
 
-                            Log.d(TAG, "temp " + temp[0] + " pres " + pressure[0]);
+                            Log.d(TAG, "temp " + temp[0]);
 
                             CityView.setText(String.format("Город %s", CityName));
                             TempView.setText(String.format("Температура %d градусов", temperature));
@@ -242,6 +238,7 @@ class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
 }
 
 

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Weather</string>
     <string name="open_weather_maps_app_id">11111</string>
+    <string name="start">Start service</string>
+    <string name="stop">Stop service</string>
 </resources>
+

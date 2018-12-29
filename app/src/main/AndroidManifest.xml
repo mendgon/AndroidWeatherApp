@@ -19,7 +19,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".change_sity" />
-        <activity android:name=".DataBase"></activity>
+        <activity android:name=".DataBase" />
+
+        <service
+            android:name=".MyService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
